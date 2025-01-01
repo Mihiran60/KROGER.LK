@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROGER</title>
+    <link rel="icon" type="image/png" href="3097041.png">
+    <style>
+        /* Reset styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: white; /* Set the background color to white */
+            color: black; /* Text color set to black for better contrast */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+
+        }
+ 
+        .container {
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .logo {
+            margin-bottom: 0px;
+        }
+
+        .logo img {
+            max-width: 350px;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            position: relative;
+            top: -50px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            position: relative;
+            top: -50px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: white;
+            background: #77be97; /* Apple blue */
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.2s ease-in-out;
+            position: relative;
+            top: -50px;
+        }
+
+        .cta-button:hover {
+            background: #42775a;
+            transform: scale(1.05);
+        }
+
+        .cta-button:active {
+            transform: scale(0.95);
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #606060; /* Gray for a subtle footer */
+            position: relative;
+            top: -50px;
+        }
+
+        .footer a {
+            color: #606060;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: black;
+        }
+
+   
+    </style>
+</head>
+<body>
+
+  
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="/Kroger-Logo-1902.png" alt="Logo">
+        </div>
+
+        <!-- Title and Subtitle -->
+        <div class="title">Get Started with Your Device</div>
+        <div class="subtitle">Stream your favorite movies, shows, and more. Ready when you are.</div>
+
+        <!-- Call-to-Action Button -->
+        <a href="index.html" class="cta-button">Get Started</a>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Need help? <a href="#">Contact Support</a></p>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        const canvas = document.getElementById('curveCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Resize canvas to full window size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Handle window resizing
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Curve animation properties
+        const curves = [];
+        const numCurves = 5;
+
+        // Create initial curves
+        for (let i = 0; i < numCurves; i++) {
+            curves.push({
+                controlX: Math.random() * canvas.width,
+                controlY: Math.random() * canvas.height,
+                startX: Math.random() * canvas.width,
+                startY: Math.random() * canvas.height,
+                endX: Math.random() * canvas.width,
+                endY: Math.random() * canvas.height,
+                dx: (Math.random() - 0.5) * 2,
+                dy: (Math.random() - 0.5) * 2,
+            });
+        }
+
+        // Animation loop
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw each curve
+            curves.forEach(curve => {
+                ctx.beginPath();
+                ctx.moveTo(curve.startX, curve.startY);
+                ctx.quadraticCurveTo(
+                    curve.controlX,
+                    curve.controlY,
+                    curve.endX,
+                    curve.endY
+                );
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Update curve points
+                curve.controlX += curve.dx;
+                curve.controlY += curve.dy;
+
+                // Bounce back from edges
+                if (curve.controlX < 0 || curve.controlX > canvas.width) {
+                    curve.dx *= -1;
+                }
+                if (curve.controlY < 0 || curve.controlY > canvas.height) {
+                    curve.dy *= -1;
+                }
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
